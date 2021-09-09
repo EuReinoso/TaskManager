@@ -1,0 +1,55 @@
+/* tasks styles */
+.add-div-block{
+    display: flex;
+    justify-content: center;
+}
+
+.add-task-bar{
+    cursor: pointer;
+}
+
+.fa-plus-square{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.add-div{
+    padding: 0px;
+    max-width: 450px;
+    min-width: 380px;
+}
+
+.blocks-list{
+    padding: 10px 10px 10px 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.block-div{
+    background-color: #021b5aa1;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: rgb(0, 0, 0);
+    padding-left: 10px;
+}
+
+.task-title{
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.task-list{
+    padding-left: 0px;
+}
+
+.task-item{
+    list-style: none;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+div{
+    display: block;
+}
