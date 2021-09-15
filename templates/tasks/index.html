@@ -33,180 +33,24 @@
 
 <div class="card-columns blocks-list">
         
+        {% if blocks %}
+        {% for block in blocks %}
         <div class="card block-div">
             <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
+                <h5 class="card-title task-title">{{block.title}}</h5>
                 <ul class="task-list">
+                    {% for task in tasks %}
+                    {% if task.block == block %}
                     <li class="task-item">
-                        task 1
+                        {{task.description}}
                     </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>   
             </div>
         </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-        <div class="card block-div">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">Card title that wraps to a new line</h5>
-                <ul class="task-list">
-                    <li class="task-item">
-                        task 1
-                    </li>
-                    <li class="task-item">
-                        task 2
-                    </li>
-                    <li class="task-item">
-                        task 3
-                    </li>
-                </ul>   
-            </div>
-        </div>
-
+        {% endfor %}
+        {% endif %}
 </div>
 
 {% endblock %}
