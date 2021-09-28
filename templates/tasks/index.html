@@ -2,7 +2,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
@@ -11,25 +11,9 @@
     <!-- Add Note -->
     <div class="col-5 add-div">
         <input class = "form-control" type= "text" name="add-div-title" id="add-div-title" placeholder="Add new block...">
-        <i class="far fa-plus-square"></i>
+        <i class="far fa-plus-square add-task-bar-icon"></i>
     </div>
 </div>
-
-<!-- <div class="blocks-list">
-    <div class="block-div">
-        <span class="task-title">Title</span>
-            <ul class="task-list">
-                <li class="task-item">
-                    task 1
-                </li>
-                <li class="task-item">
-                    task 2
-                </li>
-                <li class="task-item">
-                    task 3
-                </li>
-            </ul>
-    </div> -->
 
 <div class="card-columns blocks-list">
         
@@ -42,10 +26,21 @@
                     {% for task in tasks %}
                     {% if task.block == block %}
                     <li class="task-item">
+                        <input type="checkbox" name="" id="">
                         {{task.description}}
+                        <!-- <a class="" href="#"><i class="far fa-edit task-edit-icon"></i></a>-->
+                        <a class="del-task-icon" href="#"><i class="fas fa-times task-edit-icon"></i></a>
                     </li>
                     {% endif %}
                     {% endfor %}
+                    <!-- Add Task Form -->
+                    <form method="POST">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {% render_field form.description type="textarea" rows="1" cols="4" placeholder="New Task..." class="form-control add-task-form" %}
+                            <button type="submit" name="{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                        </div>
+                    </form>
                 </ul>   
             </div>
         </div>
