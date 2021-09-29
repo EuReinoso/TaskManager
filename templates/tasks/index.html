@@ -29,7 +29,7 @@
                         <input type="checkbox" name="" id="">
                         {{task.description}}
                         <!-- <a class="" href="#"><i class="far fa-edit task-edit-icon"></i></a>-->
-                        <a class="del-task-icon" href="#"><i class="fas fa-times task-edit-icon"></i></a>
+                        <a class="del-task-icon" href="delete-task-{{task.id}}"><i class="fas fa-times task-edit-icon"></i></a>
                     </li>
                     {% endif %}
                     {% endfor %}
@@ -37,8 +37,8 @@
                     <form method="POST">
                         <div class="form-group">
                             {% csrf_token %}
-                            {% render_field form.description type="textarea" rows="1" cols="4" placeholder="New Task..." class="form-control add-task-form" %}
-                            <button type="submit" name="{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                            {% render_field form.description type="textarea" rows="1" cols="4" placeholder="New Task..." class="form-control add-task-form"  %}
+                            <button class="btn" type="submit" name="{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
                         </div>
                     </form>
                 </ul>   
