@@ -7,42 +7,46 @@
 
 <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
 
-<div class="container add-div-block">
+<div class="container add-block-container">
     <!-- Add Note -->
-    <div class="col-5 add-div">
-        <input class = "form-control" type= "text" name="add-div-title" id="add-div-title" placeholder="Add new block...">
-        <i class="far fa-plus-square add-task-bar-icon"></i>
-    </div>
+    <form method="POST">
+        <div class="form-group add-block-div">
+            {% csrf_token %}
+            {% render_field block_form.title rows="1" cols="1" placeholder="New BLock..." class="form-control add-block-form"  %}
+            <button class="btn" type="submit" name="add-block-button"><i class="far fa-plus-square add-block-icon"></i></button>
+        </div>
+    </form>
 </div>
 
+<!-- Blocks List -->
 <div class="card-columns blocks-list">
-        
+        <!-- Block Body -->
         {% if blocks %}
         {% for block in blocks %}
-        <div class="card block-div">
+        <div class="card block-div container">
             <div class="card-body task-list">
                 <h5 class="card-title task-title">{{block.title}}</h5>
                 <ul class="task-list">
                     {% for task in tasks %}
                     {% if task.block == block %}
-                    <li class="task-item">
-                        <input type="checkbox" name="" id="">
-                        {{task.description}}
-                        <!-- <a class="" href="#"><i class="far fa-edit task-edit-icon"></i></a>-->
-                        <a class="del-task-icon" href="delete-task-{{task.id}}"><i class="fas fa-times task-edit-icon"></i></a>
+                    <li class="form-check task-item">
+                        <input type="checkbox" class="form-check-input task-checkbox" name="" id="">
+                        <p class="task-description">{{task.description}}</p>
+                        <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon"></i></a>
                     </li>
                     {% endif %}
                     {% endfor %}
                     <!-- Add Task Form -->
-                    <form method="POST">
-                        <div class="form-group">
+                    <form method="POST" id="test-form" >
+                        <div class="form-group add-task-div">
                             {% csrf_token %}
-                            {% render_field form.description type="textarea" rows="1" cols="4" placeholder="New Task..." class="form-control add-task-form"  %}
-                            <button class="btn" type="submit" name="{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                            {% render_field task_form.description type="input" rows="1" cols="1" placeholder="New Task..." class="form-control-sm form-control add-task-form"  %}
+                            <button class="btn" type="submit" name="add-task-button-{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
                         </div>
                     </form>
                 </ul>   
             </div>
+            <a href="del-block-{{block.id}}"><i class="fas fa-times del-block-icon"></i></a>
         </div>
         {% endfor %}
         {% endif %}

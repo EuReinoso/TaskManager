@@ -1,23 +1,18 @@
 /* tasks styles */
-.add-div-block{
+.add-block-container{
     display: flex;
     justify-content: center;
 }
 
-.add-task-bar{
-    cursor: pointer;
-}
-
-.add-task-bar-icon{
-    position: absolute;
-    top: 12px;
-    right: 12px;
-}
-
-.add-div{
+.add-block-div{
     padding: 0px;
     max-width: 450px;
     min-width: 380px;
+    display: flex;
+}
+
+.add-task-bar{
+    cursor: pointer;
 }
 
 .blocks-list{
@@ -33,38 +28,71 @@
     border: 1px solid;
     border-color: rgb(0, 0, 0);
     padding-left: 10px;
+    max-width: 350px;
 }
+
 
 .task-title{
     font-size: 20px;
     color: rgb(255, 255, 255);
 }
 
+.task-checkbox{
+    left: 1.2rem;
+}
+
 .task-list{
     padding-left: 0px;
+    padding-right: 0px;
+    margin: 0;
 }
 
 .task-item{
     list-style: none;
     font-size: 14px;
+    width: 100%;
     color: rgb(255, 255, 255);
     display: flex;
+    overflow-wrap: break-word;
 }
 
-.task-edit-icon{
-    padding: 2px 2px 2px 2px;
+.task-description{
+    margin: 0;
+}
+
+.del-task-icon, .del-block-icon{
+    color: rgb(255, 228, 228);
+    position: relative;
+    right: 1px;
+}
+
+.del-block-icon{
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
 }
 
 .del-task-icon{
-    color: rgb(252, 151, 151);
+    position: absolute;
+    right: 0px;
+    padding-top: 3px;
 }
 
-.add-task-form{
+.add-task-div{
+    display: flex;
+    max-width: 300px;
+}
+
+.add-task-form,.add-block-form{
     background-color: rgb(226, 226, 250);
     color: black;  
 }
 
-.add-task-form-icon{
+.add-task-form{
+    height: 5px;
+}
+
+.add-task-form-icon, .add-block-icon{
     color: rgb(0, 0, 0);
 }
 
