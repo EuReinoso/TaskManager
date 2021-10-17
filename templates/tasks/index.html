@@ -12,7 +12,7 @@
     <form method="POST">
         <div class="form-group add-block-div">
             {% csrf_token %}
-            {% render_field block_form.title rows="1" cols="1" placeholder="New BLock..." class="form-control add-block-form"  %}
+            {% render_field block_form.title rows="1" cols="1" placeholder="New Block..." class="form-control add-block-form"  %}
             <button class="btn" type="submit" name="add-block-button"><i class="far fa-plus-square add-block-icon"></i></button>
         </div>
     </form>
@@ -27,10 +27,10 @@
             <div class="card-body task-list">
                 <h5 class="card-title task-title">{{block.title}}</h5>
                 <ul class="task-list">
-                    {% for task in tasks %}
+                    {% for task in doingtasks %}
                     {% if task.block == block %}
                     <li class="form-check task-item">
-                        <input type="checkbox" class="form-check-input task-checkbox" name="" id="">
+                        <a href="change-task-status-{{task.id}}"><i class="far fa-square task-checkbox"></i></a>
                         <p class="task-description">{{task.description}}</p>
                         <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon"></i></a>
                     </li>
@@ -44,7 +44,21 @@
                             <button class="btn" type="submit" name="add-task-button-{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
                         </div>
                     </form>
-                </ul>   
+                </ul>
+                <a href="#done-tasks-{{block.id}}" data-toggle="collapse"><i class="fas fa-list done"></i></a>
+                <div class="collapse" id="done-tasks-{{block.id}}">
+                    <ul class="task-list">
+                        {% for task in donetasks %}
+                        {% if task.block == block %}
+                        <li class="form-check task-item">
+                            <a href="change-task-status-{{task.id}}"><i class="fas fa-check-square task-checkbox done"></i></a>
+                            <del class="task-description done">{{task.description}}</del>
+                            <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon done"></i></a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             <a href="del-block-{{block.id}}"><i class="fas fa-times del-block-icon"></i></a>
         </div>

@@ -6,14 +6,14 @@ from .forms import BlockForm, TaskForm
 
 
 def tasks(request):
-    blocks = Block.objects.all().order_by('created_at')
-    tasks = Task.objects.all()
+    blocks = Block.objects.all().order_by('-created_at')
+    doingtasks = Task.objects.filter(done= 'doing')
+    donetasks = Task.objects.filter(done= 'done')
     task_form = TaskForm()
     block_form = BlockForm()
 
     if request.method == 'POST':
         if 'add-block-button' in request.POST:
-            print('test')   
             form = BlockForm(request.POST)
             if form.is_valid():
                 form.save()
@@ -35,22 +35,31 @@ def tasks(request):
 
             return redirect('/')
     
-    args = {'blocks' : blocks, 'tasks' : tasks, 'task_form' : task_form, 'block_form' : block_form}
+    args = {'blocks' : blocks, 'doingtasks' : doingtasks, 'donetasks' : donetasks, 'task_form' : task_form, 'block_form' : block_form}
     return render(request, 'tasks/index.html', args)
+
+def change_task_status(request, id):
+    task = get_object_or_404(Task, pk=id)
+    
+    if task.done == 'doing':
+        task.done = 'done'
+    else:
+        task.done = 'doing'
+
+    task.save()
+
+    return redirect('/')
+
 
 def del_task(request, id):
     task = get_object_or_404(Task, pk=id)
     task.delete()
-
-    messages.info(request, 'Task Deleted')
 
     return redirect('/')
 
 def del_block(request, id):
     block = get_object_or_404(Block,pk=id)
     block.delete()
-
-    messages.info(request, 'Block Deleted')
 
     return redirect('/')
 
