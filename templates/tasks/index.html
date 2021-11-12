@@ -63,7 +63,7 @@
                         <div class="form-group add-task-div">
                             {% csrf_token %}
                             {% render_field task_form.description type="input" rows="1" cols="1" placeholder="New Task..." class="form-control-sm form-control add-task-form"  %}
-                            <button class="btn" type="submit" name="add-task-button-{{block.title}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                            <button class="btn" type="submit" name="add-task-button-{{block.id}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
                         </div>
                     </form>
                 </ul>
