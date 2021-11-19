@@ -88,11 +88,20 @@ WSGI_APPLICATION = 'taskmanager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd11bitniftaonl',
+        'USER': 'enuiqldhaynpcf',
+        'PASSWORD': 'e23eb6b17a89f99ecb55a5b5ba68893b1989ccc05633bcf3e605b281429a5af7',
+        'HOST': 'ec2-34-203-114-67.compute-1.amazonaws.com',
+        'PORT': '5432', #at the moment of this writing google cloud postgresql is using the default postgresql port 5432
+        # 'OPTIONS': {
+        #     'sslmode': 'verify-ca', #leave this line intact
+        #     'sslrootcert': '/your/path/to/server-ca.pem',
+        #     "sslcert": "/your/path/to/client-cert.pem",
+        #     "sslkey": "/your/path/to/client-key.pem",
+        # }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
