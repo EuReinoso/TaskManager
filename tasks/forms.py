@@ -4,19 +4,26 @@ from .models import Task, Block
 from django.contrib.auth import get_user_model
 
 class TaskForm(forms.ModelForm):
-
+    description = forms.CharField( max_length=1000,
+                                   widget=forms.TextInput(attrs={ 'class' : 'form-control form-control-sm',
+                                                                  'placeholder' : 'Add task...'}))
     class Meta:
         model = Task
         fields = ('description',)
 
 class BlockForm(forms.ModelForm):
+    title = forms.CharField( max_length=50,
+                             widget=forms.TextInput(attrs={ 'class' : 'form-control form-control add-block-form',
+                                                                  'placeholder' : 'New block...'}))
 
     class Meta:
         model = Block
         fields = ('title',)
 
 class UserForm(forms.Form):
-    username = forms.CharField(max_length=30)
+    username = forms.CharField( max_length=30, 
+                                widget= forms.TextInput(attrs={ 'class' : 'form-control form-control-sm',
+                                                                'placeholder' : 'Add user...'}))
 
     def clean_username(self):
         username = self.cleaned_data['username']

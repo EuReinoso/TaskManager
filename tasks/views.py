@@ -79,11 +79,9 @@ def add_task(request, id):
 def add_user(request, id):
     block = get_object_or_404(Block, pk=id)
     
-    print(request.POST)
     user_form = UserForm(request.POST)
     if user_form.is_valid():
         username = user_form.data['username']
-        print(username)
         user = get_user_model().objects.get(username=username)
         block.user.add(user)
     else:
@@ -92,7 +90,6 @@ def add_user(request, id):
     return redirect('/')
 
 def del_user(request, user_id, block_id):
-    print("USER {} DELETED".format(user_id))
     user = get_object_or_404(get_user_model(), pk=user_id)
     block= get_object_or_404(Block, pk=block_id)
 

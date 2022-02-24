@@ -2,7 +2,6 @@
 
 {% extends 'base.html' %}
 {% load static %}
-{% load widget_tweaks %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
@@ -38,7 +37,7 @@
     <form method="POST">
         <div class="form-group add-block-div">
             {% csrf_token %}
-            {% render_field block_form.title rows="1" cols="1" placeholder="New Block..." class="form-control add-block-form"  %}
+            {{ block_form.title }}
             <button class="btn" type="submit" name="add-block-button"><i class="far fa-plus-square add-block-icon"></i></button>
         </div>
     </form>
@@ -65,9 +64,9 @@
                             {% endfor %}
                             <!-- ADD TASK FORM -->
                             <form method="POST" action="/add-task/{{block.id}}">
-                                <div class="form-group add-task-div">
+                                <div class="form-group d-flex">
                                     {% csrf_token %}
-                                    {% render_field task_form.description type="input" rows="1" cols="1" placeholder="New Task..." class="form-control-sm form-control add-task-form"  %}
+                                    {{ task_form.description }}
                                     <button class="btn" type="submit"><i class="far fa-plus-square add-task-form-icon"></i></button>
                                 </div>
                             </form>
@@ -90,15 +89,15 @@
                         <!-- BLOCK USERS COLLAPSE LIST  -->
                         <a href="#user-{{block.id}}" data-toggle="collapse"><i class="fas fa-share-alt done"></i></a>
                         <div class="collapse" id="user-{{block.id}}">
-                            <ul class="task-list">
+                            <ul class="d-flex flex-column align-items-start pl-0">
                                 {% for user in block.user.all %}
-                                    <li class="username-item">
+                                    <li class="username-item d-flex">
                                         <p>{{user.username}}</p>
                                         {% if user == block.owner %}
-                                            <i class="fas fa-crown text-warning"></i>
+                                            <i class="fas fa-crown text-warning mt-1 ml-2"></i>
                                         {% endif %}
                                         {% if request.user == block.owner and not request.user == user%}
-                                            <a href="del-user-u={{user.id}}-b={{block.id}}"><i class="fas fa-times del-user-icon done"></i></a>
+                                            <a href="del-user-u={{user.id}}-b={{block.id}}"><i class="fas fa-times del-user-icon done  ml-2"></i></a>
                                         {% endif %}
                                     </li>
                                 {% endfor %}
@@ -106,7 +105,7 @@
                             <!-- ADD USER FORM -->
                             {% if request.user == block.owner %}
                             <form method="POST" action="/add-user/{{block.id}}">
-                                <div class="form-group add-task-div">
+                                <div class="form-group d-flex">
                                     {% csrf_token %}
                                     {{ user_form.username }}
                                     <button class="btn" type="submit"><i class="far fa-plus-square add-task-form-icon"></i></button>

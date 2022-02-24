@@ -94,19 +94,11 @@ tasks styles
     color: #c0c0c0;
 }
 
-.add-task-div{
-    display: flex;
-    max-width: 300px;
-}
-
 .add-task-form,.add-block-form{
     background-color: rgb(226, 226, 250);
     color: black;  
 }
 
-.add-task-form{
-    height: 5px;
-}
 
 .add-task-form-icon, .add-block-icon{
     color: rgb(0, 0, 0);
