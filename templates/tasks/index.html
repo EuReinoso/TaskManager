@@ -9,28 +9,32 @@
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa fa-bars"></i>
-    </button>
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
 
-    <!-- Topbar Search -->
-    <form
-        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
+        <!-- Topbar Search -->
+        <form
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
             </div>
+        </form>
+        <div class="container perfil">
+            <p class="username">{{request.user.username}}</p>
+            <i class="fas fa-user fa-lg"></i>
         </div>
-    </form>
 </nav>
 
 <div class="container add-block-container">
-    <!-- Add Note -->
+    <!-- ADD BLOCK FORM -->
     <form method="POST">
         <div class="form-group add-block-div">
             {% csrf_token %}
@@ -40,51 +44,84 @@
     </form>
 </div>
 
+
 <!-- Blocks List -->
 <div class="card-columns blocks-list">
         <!-- Block Body -->
         {% if blocks %}
-        {% for block in blocks %}
-        <div class="card block-div container">
-            <div class="card-body task-list">
-                <h5 class="card-title task-title">{{block.title}}</h5>
-                <ul class="task-list">
-                    {% for task in doingtasks %}
-                    {% if task.block == block %}
-                    <li class="form-check task-item">
-                        <a href="change-task-status-{{task.id}}"><i class="far fa-square task-checkbox"></i></a>
-                        <p class="task-description">{{task.description}}</p>
-                        <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon"></i></a>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                    <!-- Add Task Form -->
-                    <form method="POST" id="test-form" >
-                        <div class="form-group add-task-div">
-                            {% csrf_token %}
-                            {% render_field task_form.description type="input" rows="1" cols="1" placeholder="New Task..." class="form-control-sm form-control add-task-form"  %}
-                            <button class="btn" type="submit" name="add-task-button-{{block.id}}"><i class="far fa-plus-square add-task-form-icon"></i></button>
+            {% for block in blocks %}
+                <div class="card block-div container">
+                    <div class="card-body task-list">
+                        <h5 class="card-title task-title">{{block.title}}</h5>
+                        <ul class="task-list">
+                            {% for task in doingtasks %}
+                                {% if task.block == block %}
+                                    <li class="form-check task-item">
+                                        <a href="change-task-status-{{task.id}}"><i class="far fa-square task-checkbox"></i></a>
+                                        <p class="task-description">{{task.description}}</p>
+                                        <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon"></i></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            <!-- ADD TASK FORM -->
+                            <form method="POST" action="/add-task/{{block.id}}">
+                                <div class="form-group add-task-div">
+                                    {% csrf_token %}
+                                    {% render_field task_form.description type="input" rows="1" cols="1" placeholder="New Task..." class="form-control-sm form-control add-task-form"  %}
+                                    <button class="btn" type="submit"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                                </div>
+                            </form>
+                        </ul>
+                        <!-- DONE TASKS COLLAPSE LIST  -->
+                        <a href="#done-tasks-{{block.id}}" data-toggle="collapse"><i class="fas fa-list done"></i></a>
+                        <div class="collapse" id="done-tasks-{{block.id}}">
+                            <ul class="task-list">
+                                {% for task in donetasks %}
+                                    {% if task.block == block %}
+                                        <li class="form-check task-item">
+                                            <a href="change-task-status-{{task.id}}"><i class="fas fa-check-square task-checkbox done"></i></a>
+                                            <del class="task-description done">{{task.description}}</del>
+                                            <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon done"></i></a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
                         </div>
-                    </form>
-                </ul>
-                <a href="#done-tasks-{{block.id}}" data-toggle="collapse"><i class="fas fa-list done"></i></a>
-                <div class="collapse" id="done-tasks-{{block.id}}">
-                    <ul class="task-list">
-                        {% for task in donetasks %}
-                        {% if task.block == block %}
-                        <li class="form-check task-item">
-                            <a href="change-task-status-{{task.id}}"><i class="fas fa-check-square task-checkbox done"></i></a>
-                            <del class="task-description done">{{task.description}}</del>
-                            <a href="del-task-{{task.id}}"><i class="fas fa-times del-task-icon done"></i></a>
-                        </li>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
+                        <!-- BLOCK USERS COLLAPSE LIST  -->
+                        <a href="#user-{{block.id}}" data-toggle="collapse"><i class="fas fa-share-alt done"></i></a>
+                        <div class="collapse" id="user-{{block.id}}">
+                            <ul class="task-list">
+                                {% for user in block.user.all %}
+                                    <li class="username-item">
+                                        <p>{{user.username}}</p>
+                                        {% if user == block.owner %}
+                                            <i class="fas fa-crown text-warning"></i>
+                                        {% endif %}
+                                        {% if request.user == block.owner and not request.user == user%}
+                                            <a href="del-user-u={{user.id}}-b={{block.id}}"><i class="fas fa-times del-user-icon done"></i></a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <!-- ADD USER FORM -->
+                            {% if request.user == block.owner %}
+                            <form method="POST" action="/add-user/{{block.id}}">
+                                <div class="form-group add-task-div">
+                                    {% csrf_token %}
+                                    {{ user_form.username }}
+                                    <button class="btn" type="submit"><i class="far fa-plus-square add-task-form-icon"></i></button>
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if request.user == block.owner %}
+                        <a href="del-block-{{block.id}}"><i class="fas fa-times del-block-icon"></i></a>
+                    {% else %}
+                        <a href="del-user-u={{user.id}}-b={{block.id}}"><i class="fas fa-times del-block-icon"></i></a>
+                    {% endif %}
                 </div>
-            </div>
-            <a href="del-block-{{block.id}}"><i class="fas fa-times del-block-icon"></i></a>
-        </div>
-        {% endfor %}
+            {% endfor %}
         {% endif %}
 </div>
 

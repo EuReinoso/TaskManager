@@ -1,4 +1,4 @@
-/* tasks styles */
+tasks styles
 .add-block-container{
     display: flex;
     justify-content: center;
@@ -51,13 +51,19 @@
     margin: 0;
 }
 
-.task-item{
+.task-item, .username-item{
     list-style: none;
     font-size: 14px;
     width: 100%;
     color: #ffffff;
     display: flex;
     overflow-wrap: break-word;
+}
+
+.username-item{
+    color: rgb(27, 27, 27);
+    margin-bottom: 0px;
+    font-size: 16px;
 }
 
 .task-description{
@@ -104,6 +110,24 @@
 
 .add-task-form-icon, .add-block-icon{
     color: rgb(0, 0, 0);
+}
+
+.perfil{
+    width: 250px;
+    margin-left: 300px;
+    color: rgb(70, 70, 70);
+}
+
+.username{
+    font-size: 20px;
+}
+
+.alert-error{
+    list-style: none;
+}
+
+.del-user-icon{
+    right: 1px;
 }
 
 div{

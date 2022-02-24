@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/tasks.css' %}">
+
+<div>
+    <div class="alert alert-danger alert-error">
+        <strong>{{user_form.username.errors}}</strong>
+    </div>
+    <div>
+        <a class="nav-link btn " href="{% url 'tasks' %}">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            <span class="text-dark">Try Again</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
