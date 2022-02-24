@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'livereload',
     'django.contrib.staticfiles',
-    'widget_tweaks',
     'tasks',
 
     #allauth
